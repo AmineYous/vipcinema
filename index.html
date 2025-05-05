@@ -1,0 +1,127 @@
+<!DOCTYPE html> 
+<html lang="fr">
+    <head>
+        <base id="dynamic-base" href="/VIPCinema/">
+        <script>
+          if (location.hostname.includes('localhost') || location.hostname === '127.0.0.1') {
+            document.getElementById('dynamic-base').href = '/';
+          }
+        </script>
+      
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Site web professionnel de location de films</title>
+        <link rel="stylesheet" href="style.css">
+      </head>
+      
+<body>
+    <!-- En-tête global -->
+    <header class="main-header">
+        <img src="media/logo.png" alt="Logo VIP Cinema - Accueil" class="logo">
+    </header>
+
+    <!-- Superposition de transition noire -->
+    <div class="fade-overlay"></div>
+
+    <!-- Vidéo de fond -->
+    <div class="video-container">
+        <div class="video-container">
+            <video 
+              id="background-video" 
+              autoplay 
+              muted 
+              playsinline 
+              webkit-playsinline 
+              preload="auto"
+            >
+              <source src="media/videowebsite.mp4" type="video/mp4">
+              Votre navigateur ne supporte pas les vidéos.
+            </video>
+          </div>
+          
+    </div>
+
+    <!-- Image qui apparaît après la transition (John Wick) -->
+    <img id="profile-image" src="media/profile.png" alt="John Wick" 
+         style="display: none; position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: 3;">
+
+    <!-- Formulaire de connexion -->
+    <div class="login-container">
+        <img src="media/logo.png" alt="Logo VIP Cinema" class="logo">
+        <h2>Bienvenue sur <span style="color: #007bff;">VIP CINEMA</span></h2>
+        <form id="login-form">
+            <input 
+                type="email" 
+                id="email" 
+                placeholder="Adresse e-mail" 
+                required 
+                aria-label="Adresse e-mail"
+            >
+            <input 
+                type="password" 
+                id="password" 
+                placeholder="Mot de passe" 
+                required 
+                aria-label="Mot de passe"
+                autocomplete="off"
+            >
+            <button type="submit" class="submit-btn" aria-label="Se connecter">Se connecter</button>
+            <div id="error-message" style="color: red; margin-top: 10px;"></div>
+        </form>
+
+        <!-- Lien Inscrivez-vous -->
+        <div class="signup-link">
+            <p>Pas encore de compte ? <a href="signup.html">Inscrivez-vous ici</a></p>
+        </div>
+    </div>
+
+    <!-- Script de connexion -->
+    <script>
+        document.getElementById('login-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const email = document.getElementById('email').value.trim();
+            const password = document.getElementById('password').value.trim();
+            const errorMessage = document.getElementById('error-message');
+
+            if (!email || !password) {
+                errorMessage.textContent = "Veuillez remplir tous les champs.";
+                return;
+            }
+
+            try {
+                const isLocal = location.hostname === 'localhost' || location.hostname === '127.0.0.1';
+                const BASE_API_URL = isLocal ? 'http://localhost:5000/VIPCinema/api' : '/VIPCinema/api';
+;
+
+
+                const response = await fetch(`${BASE_API_URL}/login`, {
+
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email, password })
+                });
+
+                const data = await response.json();
+
+                if (response.ok) {
+                    errorMessage.style.color = 'green';
+                    errorMessage.textContent = "Connexion réussie. Redirection...";
+                    setTimeout(() => {
+                        sessionStorage.setItem('token', data.token);
+                        window.location.href = 'movies.html';
+                    }, 1500);
+                } else {
+                    errorMessage.textContent = data.message || "Erreur lors de la connexion.";
+                }
+            } catch (error) {
+                console.error("Erreur lors de la connexion : ", error);
+                errorMessage.textContent = "Une erreur est survenue. Veuillez réessayer.";
+            }
+        });
+    </script>
+
+    <!-- Script de transition -->
+    <script src="js/transition.js"></script>
+</body>
+</html>

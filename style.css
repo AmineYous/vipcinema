@@ -1,0 +1,13 @@
+@import url('style/base.css');
+@import url('style/layout.css');
+@import url('style/login.css');
+@import url('style/films.css');
+@import url('style/responsive.css');
+@import url('style/profile.css');
+body {
+    font-family: 'Inter', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: var(--background-color);
+    color: var(--font-color);
+}

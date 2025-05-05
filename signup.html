@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <base id="dynamic-base" href="/VIPCinema/">
+        <script>
+          if (location.hostname.includes('localhost') || location.hostname === '127.0.0.1') {
+            document.getElementById('dynamic-base').href = '/';
+          }
+        </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inscription - VIP CINEMA</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Background Image -->
+    <div class="background-image"></div>
+
+    <!-- Formulaire d'inscription -->
+    <div class="signup-container">
+        <div class="logo-container">
+            <img src="media/logo.png" alt="VIP Cinema Logo" class="signup-logo">
+        </div>
+        <h2>Créer un compte sur <span style="color: #007bff;">VIP CINEMA</span></h2>
+        <form id="signup-form">
+            <input 
+                type="text" 
+                id="name" 
+                placeholder="Nom complet" 
+                required 
+                aria-label="Nom complet"
+            >
+            <input 
+                type="email" 
+                id="email" 
+                placeholder="Adresse e-mail" 
+                required 
+                aria-label="Adresse e-mail"
+            >
+            <div style="position: relative;">
+                <input 
+                    type="password" 
+                    id="password" 
+                    placeholder="Mot de passe" 
+                    required 
+                    aria-label="Mot de passe"
+                    autocomplete="off"
+                >
+                <span id="toggle-password" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); cursor: pointer;">👁️</span>
+            </div>
+            <input 
+                type="password" 
+                id="confirm-password" 
+                placeholder="Confirmer le mot de passe" 
+                required 
+                aria-label="Confirmer le mot de passe"
+                autocomplete="off"
+            >
+            <button type="submit" class="submit-btn" aria-label="S'inscrire">S'inscrire</button>
+            <div id="error-message" style="color: red; margin-top: 10px;"></div>
+        </form>
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/signup.js"></script>
+</body>
+</html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <base id="dynamic-base" href="/VIPCinema/">
+        <script>
+          if (location.hostname.includes('localhost') || location.hostname === '127.0.0.1') {
+            document.getElementById('dynamic-base').href = '/';
+          }
+        </script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mon Profil - VIP CINEMA</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body class="profile-page">
+  <header>
+    <div class="navbar">
+      <img src="media/logo.png" alt="VIP Cinema Logo" class="navbar-logo">
+      <nav>
+        <a href="movies.html">Films</a>
+        <a href="profile.html" class="active">Profil</a>
+        <a href="about.html">À propos</a>
+
+        <a href="#" id="logout-button">Déconnexion</a>
+      </nav>
+    </div>
+  </header>
+  <main class="profile-container">
+    <!-- Profile Card -->
+    <div class="profile-card">
+      <img id="current-profile-picture" src="" alt="Photo de profil" class="profile-pic" style="display: none;">
+      <h1>Mon Profil</h1>
+      <p><strong>Nom :</strong> <span id="user-name">Chargement...</span></p>
+      <p><strong>Email :</strong> <span id="user-email">Chargement...</span></p>
+    </div>
+
+    <div class="upload-wrapper">
+      <label for="profilePicture" class="custom-file-label">
+        <span id="file-name">Choisissez une image</span>
+        <input type="file" id="profilePicture" name="profilePicture" accept="image/*" hidden>
+      </label>
+      <button id="uploadBtn" class="upload-btn">Upload</button>
+    </div>
+    
+    <!-- Update Info Form -->
+    <div class="update-info-section">
+      <h2>Modifier mes informations</h2>
+      <form id="updateForm">
+        <label for="newName">Nom :</label>
+        <input type="text" id="newName" name="name" placeholder="Nouveau nom">
+        <label for="newEmail">Email :</label>
+        <input type="email" id="newEmail" name="email" placeholder="Nouvel email">
+        <label for="newPassword">Nouveau mot de passe :</label>
+        <input type="password" id="newPassword" name="password" placeholder="Nouveau mot de passe">
+        <button type="submit">Enregistrer</button>
+      </form>
+    </div>
+    <div class="rented-movies-section">
+      <h2>Mes Films Loués</h2>
+      <ul id="rented-movies-list">
+        <li>Chargement des films...</li>
+      </ul>
+    </div>
+    
+  </main>
+  <footer>
+    <p>&copy; 2024 VIP CINEMA. Tous droits réservés.</p>
+  </footer>
+  <script src="js/profile.js" defer></script>
+
+</body>
+</html>
